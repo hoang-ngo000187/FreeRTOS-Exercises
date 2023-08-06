@@ -1,0 +1,46 @@
+23:56:39 **** Incremental Build of configuration Debug for project 001Tasks ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I"D:/Workspace/RTOS_Workspace/RTOS_workspace/001Tasks/ThirdParty/FreeRTOS" -I"D:/Workspace/RTOS_Workspace/RTOS_workspace/001Tasks/ThirdParty/FreeRTOS/include" -I"D:/Workspace/RTOS_Workspace/RTOS_workspace/001Tasks/ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:94:84: warning: passing argument 6 of 'xTaskCreate' from incompatible pointer type [-Wincompatible-pointer-types]
+   94 |   status = xTaskCreate(task1_handler, "Task-1", 200, "Hello world from Task-1", 2, task1_handle);
+      |                                                                                    ^~~~~~~~~~~~
+      |                                                                                    |
+      |                                                                                    TaskHandle_t {aka struct tskTaskControlBlock *}
+In file included from ../Core/Src/main.c:26:
+D:/Workspace/RTOS_Workspace/RTOS_workspace/001Tasks/ThirdParty/FreeRTOS/include/task.h:354:50: note: expected 'struct tskTaskControlBlock ** const' but argument is of type 'TaskHandle_t' {aka 'struct tskTaskControlBlock *'}
+  354 |                             TaskHandle_t * const pxCreatedTask ) PRIVILEGED_FUNCTION;
+      |                             ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+../Core/Src/main.c:97:84: warning: passing argument 6 of 'xTaskCreate' from incompatible pointer type [-Wincompatible-pointer-types]
+   97 |   status = xTaskCreate(task2_handler, "Task-2", 200, "Hello world from Task-2", 2, task2_handle);
+      |                                                                                    ^~~~~~~~~~~~
+      |                                                                                    |
+      |                                                                                    TaskHandle_t {aka struct tskTaskControlBlock *}
+In file included from ../Core/Src/main.c:26:
+D:/Workspace/RTOS_Workspace/RTOS_workspace/001Tasks/ThirdParty/FreeRTOS/include/task.h:354:50: note: expected 'struct tskTaskControlBlock ** const' but argument is of type 'TaskHandle_t' {aka 'struct tskTaskControlBlock *'}
+  354 |                             TaskHandle_t * const pxCreatedTask ) PRIVILEGED_FUNCTION;
+      |                             ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+../Core/Src/main.c:94:12: warning: 'task1_handle' is used uninitialized [-Wuninitialized]
+   94 |   status = xTaskCreate(task1_handler, "Task-1", 200, "Hello world from Task-1", 2, task1_handle);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:97:12: warning: 'task2_handle' may be used uninitialized [-Wmaybe-uninitialized]
+   97 |   status = xTaskCreate(task2_handler, "Task-2", 200, "Hello world from Task-2", 2, task2_handle);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "001Tasks.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Workspace\RTOS_Workspace\RTOS_workspace\001Tasks\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="001Tasks.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 001Tasks.elf
+ 
+arm-none-eabi-size   001Tasks.elf 
+arm-none-eabi-objdump -h -S  001Tasks.elf  > "001Tasks.list"
+   text	   data	    bss	    dec	    hex	filename
+  19788	    120	  79200	  99108	  18324	001Tasks.elf
+Finished building: default.size.stdout
+ 
+Finished building: 001Tasks.list
+ 
+23:56:50 **** Incremental Build of configuration Debug for project 001Tasks ****
+make -j8 all 
+arm-none-eabi-size   001Tasks.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19788	    120	  79200	  99108	  18324	001Tasks.elf
+Finished building: default.size.stdout
+ 
