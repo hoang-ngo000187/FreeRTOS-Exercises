@@ -1,0 +1,28 @@
+01:20:11 **** Incremental Build of configuration Debug for project 002LED_Tasks ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"D:/Workspace/RTOS_Workspace/RTOS_workspace/common/ThirdParty/FreeRTOS/include" -I"D:/Workspace/RTOS_Workspace/RTOS_workspace/common/ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Workspace/RTOS_Workspace/RTOS_workspace/common/ThirdParty/SEGGER/Config" -I"D:/Workspace/RTOS_Workspace/RTOS_workspace/common/ThirdParty/SEGGER/OS" -I"D:/Workspace/RTOS_Workspace/RTOS_workspace/common/ThirdParty/SEGGER/SEGGER" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "002LED_Tasks.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Workspace\RTOS_Workspace\RTOS_workspace\002LED_Tasks\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="002LED_Tasks.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 002LED_Tasks.elf
+ 
+arm-none-eabi-size   002LED_Tasks.elf 
+arm-none-eabi-objdump -h -S  002LED_Tasks.elf  > "002LED_Tasks.list"
+   text	   data	    bss	    dec	    hex	filename
+  29216	     36	 110228	 139480	  220d8	002LED_Tasks.elf
+Finished building: default.size.stdout
+ 
+Finished building: 002LED_Tasks.list
+ 
+01:20:32 **** Incremental Build of configuration Debug for project 002LED_Tasks ****
+make -j8 all 
+arm-none-eabi-size   002LED_Tasks.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29216	     36	 110228	 139480	  220d8	002LED_Tasks.elf
+Finished building: default.size.stdout
+ 
+01:24:28 **** Incremental Build of configuration Debug for project 002LED_Tasks ****
+make -j8 all 
+arm-none-eabi-size   002LED_Tasks.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29216	     36	 110228	 139480	  220d8	002LED_Tasks.elf
+Finished building: default.size.stdout
+ 
