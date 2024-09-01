@@ -1,0 +1,8 @@
+../Core/Src/main.c:76:5:main	5
+../Core/Src/main.c:134:6:SystemClock_Config	3
+../Core/Src/main.c:181:13:MX_GPIO_Init	1
+../Core/Src/main.c:319:13:led_green_handler	2
+../Core/Src/main.c:344:13:led_orange_handler	2
+../Core/Src/main.c:369:13:led_red_handler	2
+../Core/Src/main.c:395:13:button_handler	3
+../Core/Src/main.c:421:6:Error_Handler	1
