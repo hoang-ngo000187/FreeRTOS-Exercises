@@ -54,7 +54,11 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+void handler_menu_task(void *param);
+void handler_led_task(void *param);
+void handler_rtc_task(void * param);
+void handler_cmd_task(void * param);
+void handler_print_task(void * param);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

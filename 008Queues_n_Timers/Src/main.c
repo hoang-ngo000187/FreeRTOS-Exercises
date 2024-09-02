@@ -57,6 +57,8 @@ xTaskHandle handle_cmd_task;
 
 QueueHandle_t q_data;
 QueueHandle_t q_print;
+
+volatile uint8_t user_data;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -126,7 +128,10 @@ int main(void)
   
   q_print = xQueueCreate(10, sizeof(size_t));
   configASSERT(q_print != NULL);
-  	
+
+  HAL_UART_Receive_IT(&huart2, (uint8_t *)&user_data, 1);
+  
+  vTaskStartScheduler();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -397,7 +402,36 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	uint8_t dummy = 0;
+  // Is Queue full?
+  if (xQueueIsQueueFullFromISR(q_data) == pdFALSE)
+  	{
+  		// Queue is not full, enqueue data byte
+  		xQueueSendFromISR(q_data, (void *)&user_data, NULL);
+  	}
+  else
+  	{
+  		// Queue is full
+  		if (user_data == '\n')
+  			{
+  				// Delete the last data byte of Queue
+  				xQueueReceiveFromISR(q_data, (void *)&dummy, NULL);
+				// Make the last data byte of Queue is '\n'
+				xQueueSendFromISR(q_data, (void *)&user_data, NULL);
+  			}
+  	}
 
+  if (user_data == '\n')
+  	{
+  		// Send the notification to Command handler task
+  		xTaskNotifyFromISR(handle_cmd_task, 0, eNoAction, NULL);
+  	}
+
+  // Enable UART data byte reception again in IT mode
+  HAL_UART_Receive_IT(&huart2, (uint8_t *)&user_data, 1);
+}
 /* USER CODE END 4 */
 
 /**
