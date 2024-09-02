@@ -9,10 +9,58 @@
 int extract_command(command_t* cmd);
 void process_command(command_t* cmd);
 
+const char* msg_inv = "//// Invalid option ////\n";
+
 void handler_menu_task(void *param)
 {
+	uint32_t u32Cmd_addr;
+	command_t *cmd;
+	int option = 0;
+	
+	const char* msg_menu = "==============================\n"
+							"|				MENU			|\n"
+							"==============================\n"
+								"LED effect			-----> 0\n"
+								"Date and time		-----> 1\n"
+								"Exit				-----> 2\n"
+								"Enter your choice here: ";
 	while(1){
+		xQueueSend(q_print, &msg_menu, portMAX_DELAY);
 
+		// Notify wait to receive the address of command variable
+		xTaskNotifyWait(0, 0, &u32Cmd_addr, portMAX_DELAY);
+		cmd = (command_t *)u32Cmd_addr;
+
+		if (cmd->u32length == 1)
+		{
+			option = cmd->u8Payload[0] - 48;
+			switch(option)
+			{
+				case 0:
+					curr_state = sLedEffect;
+					xTaskNotify(handle_led_task, 0, eNoAction);
+					break;
+				case 1:
+					curr_state = sRtcMenu;
+					xTaskNotify(handle_rtc_task, 0, eNoAction);
+					break;
+				case 2:/*implement exit --> go to Wait to run again when some other task notifies.*/
+					break;
+				default:
+					// Invalid command
+					xQueueSend(q_print, &msg_inv, portMAX_DELAY);
+					continue; // COntinue to wait  the command notification
+			}
+			
+		}
+		else
+		{
+			// Invalid command
+			xQueueSend(q_print, &msg_inv, portMAX_DELAY);
+		}
+
+		// Wait to run again when some other task notifies.
+		xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
 	}
 }
 
