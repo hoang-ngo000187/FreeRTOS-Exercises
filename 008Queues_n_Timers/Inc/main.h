@@ -32,11 +32,37 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+typedef struct {
+	uint8_t u8Payload[10];
+	uint32_t u32length;
+} command_t;
+
+typedef enum {
+	sMainMenu = 0,
+	sLedEffect,
+	sRtcMenu,
+	sRtcTimeConfig,
+	sRtcDateConfig,
+	sRtcReport,
+}state_t;
+
+extern xTaskHandle handle_menu_task;
+extern xTaskHandle handle_led_task;
+extern xTaskHandle handle_rtc_task;
+extern xTaskHandle handle_print_task;
+extern xTaskHandle handle_cmd_task;
+
+extern QueueHandle_t q_data;
+extern QueueHandle_t q_print;
+
+extern state_t curr_state;
 
 /* USER CODE END ET */
 

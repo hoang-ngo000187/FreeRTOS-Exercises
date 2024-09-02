@@ -23,9 +23,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,6 +56,8 @@ QueueHandle_t q_data;
 QueueHandle_t q_print;
 
 volatile uint8_t user_data;
+state_t curr_state = sMainMenu;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
