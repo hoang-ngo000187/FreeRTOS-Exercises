@@ -155,7 +155,10 @@ void handler_print_task(void * param);
 #define MEMS_INT2_Pin GPIO_PIN_1
 #define MEMS_INT2_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
-
+#define LED1	LD4_Pin	// LED GREEN
+#define LED2	LD3_Pin	// LED ORANGE
+#define LED3	LD5_Pin	// LED RED
+#define LED4	LD6_Pin	// LED BLUE
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
